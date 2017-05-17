@@ -4,7 +4,8 @@ html, body {
   margin: 0;
 }
 
-input[type="file"] {
+input[type="file"],
+canvas {
   border: 2px dashed #a0a0a0;
   margin: 20px;
   padding: 10px;

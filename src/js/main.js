@@ -1,20 +1,40 @@
 import { applyFilter } from './filter';
 
-const handleFileSelect = evt => {
+let images = [];
 
-  let output = [];
+function loadImageAndDrwaInCanvas(imageFile, canvas) {
+
+  const context = canvas.getContext('2d');
+  const image = new Image();
+  const reader = new FileReader();
+
+  image.addEventListener("load", function() {
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    context.drawImage(image, 0, 0);
+  });
+
+  reader.addEventListener("load", function () {
+    image.src = reader.result;
+  }, false);
+
+  reader.readAsDataURL(imageFile);
+};
+
+function handleFileSelect(evt) {
+
   const files = evt.target.files;
+  const imagesContainers = document.getElementById('images-container');
 
   for(let i = 0; i < files.length; i++) {
+
     let file = files[i];
+    let imageCanvas = document.createElement('canvas');
 
-    output.push('<li><strong>', escape(file.name), '</strong> (', file.type || 'n/a', ') - ',
-                file.size, ' bytes, last modified: ',
-                file.lastModifiedDate ? file.lastModifiedDate.toLocaleDateString() : 'n/a',
-                '</li>');
+    images.push(imageCanvas);
+    imagesContainers.appendChild(imageCanvas);
+    loadImageAndDrwaInCanvas(file, imageCanvas);
   };
-
-  document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
