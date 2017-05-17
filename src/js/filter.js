@@ -1,22 +1,30 @@
-import { Caman } from "./caman";
+const applyFilter = (imageData, width, height) => {
 
-const applyFilter = (canvas) => {
-  console.log("Applying filter to canvas");
-  Caman(canvas, function() {
-    this.brightness(45);
-    this.vibrance(20);
-    this.hue(45);
-    this.gamma(3);
-    this.clip(35);
-    this.stackBlur(0);
-    this.contrast(-5);
-    this.saturation(0);
-    this.exposure(0);
-    this.sepia(70);
-    this.noise(0);
-    this.sharpen(2);
-    this.render();
+  return new Promise(function(resolve) {
+
+    for (let y = 0; y < height; y++) {
+
+      let inPos = y * width * 4;
+      let outPos = inPos;
+      let r, g, b, a;
+
+      for (let x = 0; x < width; x++) {
+        r = Math.abs( 255 * Math.cos( imageData[inPos++] ));
+        g = 255 - imageData[inPos++];
+        b = 255 - imageData[inPos++];
+        a = Math.abs( 255 * Math.cos( imageData[inPos++] ));
+
+        imageData[outPos++] = r;
+        imageData[outPos++] = g;
+        imageData[outPos++] = b;
+        imageData[outPos++] = a;
+      }
+    }
+
+    resolve();
   });
 }
 
-export { applyFilter };
+export {
+  applyFilter
+};

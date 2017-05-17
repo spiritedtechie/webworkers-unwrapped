@@ -1,4 +1,6 @@
-import { applyFilter } from './filter';
+import {
+  applyFilter
+} from './filter';
 
 let images = [];
 
@@ -18,7 +20,7 @@ function loadImageAndDrwaInCanvas(imageFile, imagesContainer) {
       resolve();
     });
 
-    reader.addEventListener("load", function () {
+    reader.addEventListener("load", function() {
       image.src = reader.result;
     }, false);
 
@@ -31,7 +33,7 @@ function handleFileSelect(evt) {
   const files = evt.target.files;
   const imagesContainers = document.getElementById('images-container');
 
-  for(let i = 0; i < files.length; i++) {
+  for (let i = 0; i < files.length; i++) {
 
     let file = files[i];
     let container = document.createElement('div');
@@ -50,8 +52,15 @@ function handleFileSelect(evt) {
 
 function applyFilterToAllImages() {
   images.forEach(function(image) {
-    console.dir(image);
-    applyFilter(image.firstChild);
+
+    const canvas = image.firstChild;
+    const context = canvas.getContext("2d");
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+    applyFilter(imageData.data, canvas.width, canvas.height)
+      .then(function() {
+        context.putImageData(imageData, 0, 0);
+      });
   })
 }
 
