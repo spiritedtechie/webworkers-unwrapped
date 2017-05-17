@@ -38,14 +38,17 @@ function handleFileSelect(evt) {
     let file = files[i];
     let container = document.createElement('div');
     let imageCanvas = document.createElement('canvas');
-    let loadingSpan = document.createElement('span');
-    let loadingButton = document.createElement('input');
-    loadingButton.type = "button"
-    loadingButton.value = "Remove"
+    let footerSpan = document.createElement('span');
+    let hideButton = document.createElement('input');
+    hideButton.type = "button"
+    hideButton.value = "Hide"
+    hideButton.addEventListener('click', (evt) => {
+      container.style.display = "none";
+    });
 
-    loadingSpan.appendChild(loadingButton);
+    footerSpan.appendChild(hideButton);
     container.appendChild(imageCanvas);
-    container.appendChild(loadingSpan);
+    container.appendChild(footerSpan);
 
     imagesContainers.appendChild(container);
     images.push(container);
@@ -61,10 +64,8 @@ function applyFilterToAllImages() {
     const context = canvas.getContext("2d");
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-    applyFilter(imageData.data, canvas.width, canvas.height)
-      .then(function() {
-        context.putImageData(imageData, 0, 0);
-      });
+    applyFilter(imageData.data, canvas.width, canvas.height);
+    context.putImageData(imageData, 0, 0);
   })
 }
 
