@@ -1,6 +1,7 @@
+import { Caman } from "./caman";
+
 const applyFilter = (canvas) => {
   console.log("Applying filter to canvas");
-  console.dir(canvas);
   Caman(canvas, function() {
     this.brightness(45);
     this.vibrance(20);
@@ -18,4 +19,4 @@ const applyFilter = (canvas) => {
   });
 }
 
-module.exports = { applyFilter };
+export { applyFilter };
