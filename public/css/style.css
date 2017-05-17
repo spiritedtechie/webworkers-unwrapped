@@ -1,4 +1,11 @@
 html, body {
+  font-family: 'Open Sans Condensed', sans-serif;
   padding: 0;
   margin: 0;
+}
+
+input[type="file"] {
+  border: 2px dashed #a0a0a0;
+  margin: 20px;
+  padding: 10px;
 }
