@@ -2,10 +2,11 @@ import { applyFilter } from './filter';
 
 let images = [];
 
-function loadImageAndDrwaInCanvas(imageFile, canvas) {
+function loadImageAndDrwaInCanvas(imageFile, imagesContainer) {
 
   return new Promise((resolve, reject) => {
 
+    const canvas = imagesContainer.firstChild;
     const context = canvas.getContext('2d');
     const image = new Image();
     const reader = new FileReader();
@@ -33,17 +34,24 @@ function handleFileSelect(evt) {
   for(let i = 0; i < files.length; i++) {
 
     let file = files[i];
+    let container = document.createElement('div');
     let imageCanvas = document.createElement('canvas');
+    let loadingSpan = document.createElement('span');
 
-    images.push(imageCanvas);
-    imagesContainers.appendChild(imageCanvas);
-    loadImageAndDrwaInCanvas(file, imageCanvas);
+    container.appendChild(imageCanvas);
+    container.appendChild(loadingSpan);
+
+    imagesContainers.appendChild(container);
+    images.push(container);
+
+    loadImageAndDrwaInCanvas(file, container);
   };
 }
 
 function applyFilterToAllImages() {
-  images.forEach(function(imageCanvas) {
-    applyFilter(imageCanvas);
+  images.forEach(function(image) {
+    console.dir(image);
+    applyFilter(image.firstChild);
   })
 }
 
