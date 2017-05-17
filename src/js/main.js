@@ -4,21 +4,25 @@ let images = [];
 
 function loadImageAndDrwaInCanvas(imageFile, canvas) {
 
-  const context = canvas.getContext('2d');
-  const image = new Image();
-  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
 
-  image.addEventListener("load", function() {
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-    context.drawImage(image, 0, 0);
+    const context = canvas.getContext('2d');
+    const image = new Image();
+    const reader = new FileReader();
+
+    image.addEventListener("load", function() {
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      context.drawImage(image, 0, 0);
+      resolve();
+    });
+
+    reader.addEventListener("load", function () {
+      image.src = reader.result;
+    }, false);
+
+    reader.readAsDataURL(imageFile);
   });
-
-  reader.addEventListener("load", function () {
-    image.src = reader.result;
-  }, false);
-
-  reader.readAsDataURL(imageFile);
 };
 
 function handleFileSelect(evt) {
@@ -37,6 +41,13 @@ function handleFileSelect(evt) {
   };
 }
 
+function applyFilterToAllImages() {
+  images.forEach(function(imageCanvas) {
+    applyFilter(imageCanvas);
+  })
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById('images-input').addEventListener('change', handleFileSelect, false);
+  document.getElementById('images-apply-filter').addEventListener('click', applyFilterToAllImages, false);
 });
