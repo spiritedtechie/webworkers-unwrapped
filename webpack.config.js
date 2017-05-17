@@ -8,7 +8,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-        { from: './public' }
+        { from: 'public' }
     ])
   ]
 };

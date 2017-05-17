@@ -4,19 +4,38 @@ html, body {
   margin: 0;
 }
 
-input[type="file"],
 canvas {
+  margin: 5px;
+  padding: 5px;
+}
+
+input[type="file"] {
   border: 2px dashed #a0a0a0;
-  margin: 20px;
-  padding: 10px;
+  margin: 15px;
+  padding: 15px;
+}
+
+div {
+  display: inline-block;
   position: relative;
 }
 
-canvas div {
+div span {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 20%;
-  background-color: red;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  vertical-align: middle;
+}
+
+div span input {
+  display: inline-block;
+  padding: 20px;
+  margin: 20px;
+  font-size: 20pt;
+  display: inline-block;
+  width: 100px;
 }

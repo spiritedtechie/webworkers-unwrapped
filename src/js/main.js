@@ -39,7 +39,11 @@ function handleFileSelect(evt) {
     let container = document.createElement('div');
     let imageCanvas = document.createElement('canvas');
     let loadingSpan = document.createElement('span');
+    let loadingButton = document.createElement('input');
+    loadingButton.type = "button"
+    loadingButton.value = "Remove"
 
+    loadingSpan.appendChild(loadingButton);
     container.appendChild(imageCanvas);
     container.appendChild(loadingSpan);
 
