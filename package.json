@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/salmenus/webworkers-unwrapped/issues"
   },
-  "homepage": "https://github.com/salmenus/webworkers-unwrapped#readme"
+  "homepage": "https://github.com/salmenus/webworkers-unwrapped#readme",
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "file-loader": "^0.11.1",
+    "html-webpack-plugin": "^2.28.0",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {}
 }
