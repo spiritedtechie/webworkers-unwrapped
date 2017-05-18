@@ -1,6 +1,4 @@
-import {
-  applyFilter
-} from './filter';
+import { applyFilter } from './filter';
 
 let images = [];
 
@@ -40,6 +38,9 @@ function handleFileSelect(evt) {
     let imageCanvas = document.createElement('canvas');
     let footerSpan = document.createElement('span');
     let hideButton = document.createElement('input');
+
+    container.id = "image-" + (images.length + 1);
+
     hideButton.type = "button"
     hideButton.value = "Hide"
     hideButton.addEventListener('click', (evt) => {
@@ -64,12 +65,10 @@ function applyFilterToAllImages() {
     const context = canvas.getContext("2d");
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-    applyFilter(imageData.data, canvas.width, canvas.height);
-    context.putImageData(imageData, 0, 0);
+    // .. to complete
   })
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById('images-input').addEventListener('change', handleFileSelect, false);
-  document.getElementById('images-apply-filter').addEventListener('click', applyFilterToAllImages, false);
 });
