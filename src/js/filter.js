@@ -80,7 +80,3 @@ const applyFilter = (imageData, width, height) => {
     }
   }
 }
-
-export {
-  applyFilter
-};

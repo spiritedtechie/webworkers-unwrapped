@@ -8,7 +8,9 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-        { from: 'public' }
+        { from: 'public' },
+        { from: 'src/js/webworker.js'},
+        { from: 'src/js/filter.js'}
     ])
   ]
 };
